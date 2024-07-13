@@ -18,9 +18,9 @@
 # O `OnlyOffice` é uma suíte de escritório online e de código aberto que oferece um conjunto abrangente de aplicativos para edição de documentos, planilhas e apresentações. Ele permite que indivíduos e equipes colaborem em tempo real, criando e editando documentos diretamente no navegador da web. O `OnlyOffice` suporta uma ampla variedade de formatos de arquivo, incluindo Microsoft Office, e oferece recursos avançados de formatação, revisão de documentos e controle de versão. Além disso, ele pode ser implantado em servidores locais ou em nuvem, proporcionando flexibilidade e segurança aos usuários. Com suas funcionalidades de colaboração e edição de documentos, o `OnlyOffice` é uma solução atraente para organizações que buscam uma alternativa de escritório online versátil e de código aberto.
 # 
 
-# ## 1. Configurar/Instalar o `OnlyOffice` no Linux Ubuntu [1]
+# ## 1. Configurar/Instalar/Usar o `OnlyOffice` no `Linux Ubuntu` [1]
 # 
-# Para instalar o `OnlyOffice` no `Linux Ubuntu`, você pode seguir estas etapas:
+# Para configurar/instalar/usar o `OnlyOffice` no `Linux Ubuntu`, você pode seguir estas etapas:
 # 
 # 1. Abra o `Terminal Emulator`. Você pode fazer isso pressionando: `Ctrl + Alt + T`
 # 
@@ -44,15 +44,15 @@
 #     2.8 Realmente atualizar os pacotes instalados para as suas versões mais recentes, com base na última vez que você executou `sudo apt update`. Digite o seguinte comando e pressione `Enter`: `sudo apt full-upgrade -y`
 #     
 
-# 3. **Adicionar o repositório OnlyOffice:** Use o seguinte comando para adicionar o repositório OnlyOffice ao seu sistema: `sudo echo "deb https://download.onlyoffice.com/repo/debian squeeze main" | sudo tee /etc/apt/sources.list.d/onlyoffice.list`
+# 3. **Adicionar o repositório `OnlyOffice`:** Use o seguinte comando para adicionar o repositório `OnlyOffice` ao seu sistema: `sudo echo "deb https://download.onlyoffice.com/repo/debian squeeze main" | sudo tee /etc/apt/sources.list.d/onlyoffice.list`
 # 
-# 4. **Adicionar a chave GPG:** Adicione a chave GPG do repositório OnlyOffice com o comando a seguir: `sudo wget https://download.onlyoffice.com/repo/onlyoffice.key`
+# 4. **Adicionar a chave GPG:** Adicione a chave GPG do repositório `OnlyOffice` com o comando a seguir: `sudo wget https://download.onlyoffice.com/repo/onlyoffice.key`
 # 
 # 5. **Executar o comando:** `sudo apt-key add onlyoffice.key`
 # 
-# 6. **Atualizar a lista de pacotes:** Atualize a lista de pacotes do sistema novamente para que o sistema reconheça o novo repositório: `sudo apt update -y`
+# 6. **Atualizar a lista de pacotes:** Atualize a lista de pacotes do sistema novamente para que o sistema reconheça o novo repositório: `sudo apt update`
 # 
-# 7. **Instalar o OnlyOffice:** Agora, você pode instalar o OnlyOffice Community Edition com o seguinte comando: `sudo snap install onlyoffice-desktopeditors`
+# 7. **Instalar o OnlyOffice:** Agora, você pode instalar o `OnlyOffice Community Edition` com o seguinte comando: `sudo snap install onlyoffice-desktopeditors`
 # 
 #     - Depois de concluída a instalação, você deve ser capaz de acessar o `OnlyOffice` em seu sistema `Linux Ubuntu`.
 # 
@@ -66,62 +66,24 @@
 # 8. Pode ser que aconteça o(s) erro(s): [2]
 # 
 #     ```
-#     W: GPG error: https://download.onlyoffice.com/repo/debian squeeze InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 8320CA65CB2DE8E5
-#     E: The repository 'https://download.onlyoffice.com/repo/debian squeeze InRelease' is not signed.
-#     N: Updating from such a repository can't be done securely, and is therefore disabled by default.
-#     N: See apt-secure(8) manpage for repository creation and user configuration details.
-#     ```
-# 
-# O erro que você está enfrentando ocorre porque o sistema não conseguiu verificar a assinatura do repositório do OnlyOffice, o que é uma questão de segurança. Para resolver esse problema, você tem a opção abaixo.
-# 
-# 9. **Opção:** Adicionar a chave pública do repositório manualmente
-# 
-# Para adicionar a chave pública e permitir que o `apt` atualize o pacote, execute o seguinte comando: `sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 8320CA65CB2DE8E5`
-# 
-# 10. Depois disso, tente atualizar a lista de pacotes novamente: `sudo apt update -y`
-
-# 11. Pode ser que aconteça o(s) erro(s): [2]
-# 
-#     ```
 #     W: https://download.onlyoffice.com/repo/debian/dists/squeeze/InRelease: Key is stored in legacy trusted.gpg keyring (`/etc/apt/trusted.gpg`), see the DEPRECATION section in apt-key(8) for details.
 #     ```
-#     aviso que você está vendo indica que a chave do repositório do OnlyOffice está armazenada no anel de chaves legado (`/etc/apt/trusted.gpg`), que está em desuso. Para resolver esse aviso, você deve mover a chave para um novo local que é mais seguro e recomendado pelas práticas atuais do Ubuntu.
-#     Passo a Passo para Corrigir o Aviso
 # 
-# 12. **Identificar a Chave do Repositório:** Primeiro, identifique a chave específica para o repositório OnlyOffice: `sudo apt-key list`
+#     Aviso que você está vendo indica que a chave do repositório do `OnlyOffice` está armazenada no anel de chaves legado (`/etc/apt/trusted.gpg`), que está em desuso. Para resolver esse aviso, você deve mover a chave para um novo local que é mais seguro e recomendado pelas práticas atuais do `Ubuntu`.
 # 
-#     Procure pela chave que corresponde ao OnlyOffice (provavelmente tem um ID que termina em `CB2DE8E5` ou algo semelhante). Anote este ID.
+# 9. **Remover o repositório existente (opcional)**: Primeiro, você pode remover o repositório existente que está causando o problema. Isso pode ser feito editando o arquivo correspondente em `/etc/apt/sources.list.d/`.
 # 
-# 13. **Exportar e Importar a Chave:** Agora, você vai exportar a chave para o novo formato e importá-la no diretório recomendado. Substitua KEY_ID pelo ID da chave que você anotou (`E09CA29F6E178040EF22B4098320CA65CB2DE8E5`):
+#     9.1 Liste os arquivos em `/etc/apt/sources.list.d/` para encontrar o arquivo do `OnlyOffice`: `ls /etc/apt/sources.list.d/`
 # 
-#     13.1 **Cria o diretório se ele não existir:** `sudo mkdir -p /usr/share/keyrings`
+#     9.2 Remova ou comente as linhas do repositório problemático. Por exemplo: `sudo nano /etc/apt/sources.list.d/onlyoffice.list`
 # 
-#     13.2 **Exporta a chave do anel legado e importa para o novo arquivo `.gpg`:** `sudo apt-key export E09CA29F6E178040EF22B4098320CA65CB2DE8E5 | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/onlyoffice-archive-keyring.gpg --import`
-# 
-# 14. Atualizar o Arquivo de Fontes do Repositório
-# 
-#     Você precisará editar o arquivo de fontes do OnlyOffice para que ele aponte para o novo anel de chaves. Este arquivo provavelmente está localizado em `/etc/apt/sources.list`:
-# 
-#     14.1 Abra o arquivo com um editor de texto (pode ser diferente de `onlyoffice.list`)
-# 
-#     ```
-#     # Abra o arquivo com um editor de texto (pode ser diferente de `onlyoffice.list`)
-#     sudo nano /etc/apt/sources.list.d/onlyoffice.list
-#     ```
-# 
-#     14.2 No arquivo, adicione ou modifique a linha que aponta para o repositório do OnlyOffice para incluir a referência à nova chave: `deb [signed-by=/usr/share/keyrings/onlyoffice-archive-keyring.gpg] https://download.onlyoffice.com/repo/debian squeeze main`
-# 
-#     14.3 Salve e feche o arquivo.
-# 
-# 15. **Atualizar a Lista de Pacotes:** Agora, atualize a lista de pacotes para aplicar as mudanças: `sudo apt update -y`
-# 
-#     Isso deve resolver o aviso sobre o uso do armazenamento de chave legado.
+#     Adicione um # no início da linha para comentá-la.
 
 # ## Referências
 # 
 # [1] OPENAI. ***Instalação do onlyoffice no ubuntu.*** Disponível em: <https://chat.openai.com/c/4a263fc4-3d7b-4755-854e-74cf83d899cf> (texto adaptado). ChatGPT. Acessado em: 03/10/2023 13:35.]
 # 
-# [2] OPENAI. ***Corrigir erro onlyoffice apt.*** Disponível em: <https://chat.openai.com/c/2e11f074-32f7-4e78-85ca-1443466c9718> (texto adaptado). ChatGPT. Acessado em: 18/10/2023 11:58.
+# [2] OPENAI. ***VS code: editor popular.*** Disponível em: <https://chat.openai.com/c/b640a25d-f8e3-4922-8a3b-ed74a2657e42> (texto adaptado). ChatGPT. Acessado em: 14/11/2023 18:56.
 # 
-# [3] OPENAI. ***VS code: editor popular.*** Disponível em: <https://chat.openai.com/c/b640a25d-f8e3-4922-8a3b-ed74a2657e42> (texto adaptado). ChatGPT. Acessado em: 14/11/2023 18:56.
+# [3] OPENAI. ***Corrigir erro onlyoffice apt.*** Disponível em: <https://chat.openai.com/c/2e11f074-32f7-4e78-85ca-1443466c9718> (texto adaptado). ChatGPT. Acessado em: 18/10/2023 11:58.
 # 
